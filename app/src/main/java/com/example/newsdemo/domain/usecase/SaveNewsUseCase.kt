@@ -1,6 +1,6 @@
 package com.example.newsdemo.domain.usecase
 
-import com.example.newsdemo.data.modelDto.topHeadlines.Article
+import com.example.newsdemo.data.remote.modelDto.topHeadlines.Article
 import com.example.newsdemo.domain.repository.NewsRepository
 
 /**
@@ -12,5 +12,5 @@ class SaveNewsUseCase(
    private val newsRepository: NewsRepository
 ) {
 
-   suspend fun execute(article:Article) = newsRepository.saveNews(article)
+   suspend fun execute(article: Article) = newsRepository.saveNews(article)
 }

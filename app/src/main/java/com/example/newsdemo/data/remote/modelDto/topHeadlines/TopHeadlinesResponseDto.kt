@@ -1,4 +1,4 @@
-package com.example.newsdemo.data.modelDto.topHeadlines
+package com.example.newsdemo.data.remote.modelDto.topHeadlines
 
 
 import com.google.gson.annotations.SerializedName

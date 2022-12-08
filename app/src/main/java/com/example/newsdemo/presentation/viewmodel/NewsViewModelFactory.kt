@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.newsdemo.domain.usecase.GetNewsHeadlinesUseCase
 import com.example.newsdemo.domain.usecase.GetSearchNewsUseCase
+import com.example.newsdemo.domain.usecase.SaveNewsUseCase
 
 /**
  * @author : Mingaleev D
@@ -14,12 +15,13 @@ import com.example.newsdemo.domain.usecase.GetSearchNewsUseCase
 class NewsViewModelFactory(
    private val app: Application,
    private val getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase,
-   private val getSearchNewsUseCase: GetSearchNewsUseCase
+   private val getSearchNewsUseCase: GetSearchNewsUseCase,
+   private val saveNewsUseCase: SaveNewsUseCase
 ) : ViewModelProvider.Factory {
    @Suppress("UNCHECKED_CAST")
    override fun <T : ViewModel> create(modelClass: Class<T>): T {
       return NewsViewModel(
-         app, getNewsHeadlinesUseCase,getSearchNewsUseCase
+         app, getNewsHeadlinesUseCase,getSearchNewsUseCase,saveNewsUseCase
       ) as T
    }
 }

@@ -6,9 +6,8 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.newsdemo.data.modelDto.topHeadlines.Article
+import com.example.newsdemo.data.remote.modelDto.topHeadlines.Article
 import com.example.newsdemo.databinding.ItemNewsHomeBinding
-import com.example.newsdemo.presentation.ui.extension.load
 
 /**
  * @author : Mingaleev D

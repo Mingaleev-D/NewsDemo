@@ -1,6 +1,6 @@
 package com.example.newsdemo.presentation.di
 
-import com.example.newsdemo.data.api.NewsApiService
+import com.example.newsdemo.data.remote.api.NewsApiService
 import com.example.newsdemo.data.repository.datasource.NewsRemoteDataSource
 import com.example.newsdemo.data.repository.datasourceImpl.NewsRemoteDataSourceImpl
 import dagger.Module

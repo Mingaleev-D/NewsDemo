@@ -30,6 +30,6 @@
         tools:layout="@layout/fragment_info" >
         <argument
             android:name="selected_article"
-            app:argType="com.example.newsdemo.data.modelDto.topHeadlines.Article" />
+            app:argType="com.example.newsdemo.data.remote.modelDto.topHeadlines.Article" />
     </fragment>
 </navigation>

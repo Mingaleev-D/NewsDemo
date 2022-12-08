@@ -1,6 +1,6 @@
 package com.example.newsdemo.domain.usecase
 
-import com.example.newsdemo.data.modelDto.topHeadlines.Article
+import com.example.newsdemo.data.remote.modelDto.topHeadlines.Article
 import com.example.newsdemo.domain.repository.NewsRepository
 import kotlinx.coroutines.flow.Flow
 

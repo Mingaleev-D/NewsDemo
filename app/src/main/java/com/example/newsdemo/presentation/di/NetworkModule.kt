@@ -1,14 +1,13 @@
 package com.example.newsdemo.presentation.di
 
 import com.example.newsdemo.BuildConfig
-import com.example.newsdemo.data.api.NewsApiService
+import com.example.newsdemo.data.remote.api.NewsApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import javax.inject.Singleton
 
 @Module

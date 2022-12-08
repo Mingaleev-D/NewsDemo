@@ -1,7 +1,8 @@
 package com.example.newsdemo.data.repository
 
-import com.example.newsdemo.data.modelDto.topHeadlines.Article
-import com.example.newsdemo.data.modelDto.topHeadlines.TopHeadlinesResponseDto
+import com.example.newsdemo.data.remote.modelDto.topHeadlines.Article
+import com.example.newsdemo.data.remote.modelDto.topHeadlines.TopHeadlinesResponseDto
+import com.example.newsdemo.data.repository.datasource.NewsLocalDataSource
 import com.example.newsdemo.data.repository.datasource.NewsRemoteDataSource
 import com.example.newsdemo.data.util.Resource
 import com.example.newsdemo.domain.repository.NewsRepository
@@ -14,7 +15,8 @@ import retrofit2.Response
  */
 
 class NewsRepositoryImpl(
-   private val newsRemoteDataSource: NewsRemoteDataSource
+   private val newsRemoteDataSource: NewsRemoteDataSource,
+   private val newsLocalDataSource: NewsLocalDataSource
 ) : NewsRepository {
 
    override suspend fun fetchNewsHeadlines(
@@ -48,7 +50,7 @@ class NewsRepositoryImpl(
    }
 
    override suspend fun saveNews(article: Article) {
-      TODO("Not yet implemented")
+      newsLocalDataSource.saveArticleToDB(article)
    }
 
    override suspend fun deleteNews(article: Article) {
