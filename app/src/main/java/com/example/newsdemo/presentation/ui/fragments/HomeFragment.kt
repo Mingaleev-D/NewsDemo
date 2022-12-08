@@ -1,12 +1,12 @@
 package com.example.newsdemo.presentation.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +17,9 @@ import com.example.newsdemo.presentation.ui.adapter.NewsAdapter
 import com.example.newsdemo.presentation.ui.main.MainActivity
 import com.example.newsdemo.presentation.viewmodel.NewsViewModel
 import com.facebook.shimmer.Shimmer
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class HomeFragment : Fragment() {
@@ -57,6 +60,7 @@ class HomeFragment : Fragment() {
 
       initRecyclerView()
       viewNewsList()
+      setSearchView()
    }
 
    private fun viewNewsList() {
@@ -131,6 +135,65 @@ class HomeFragment : Fragment() {
             isScrolling = false
          }
       }
+   }
+
+      //..search
+   fun viewSeachedNews(){
+         viewModel.searchedNews.observe(viewLifecycleOwner) { response ->
+            when (response) {
+               is Resource.Loading -> {
+                  showProgressBar()
+               }
+               is Resource.Success -> {
+                  hideProgressBar()
+                  response.data?.let {
+                     newsAdapter.differ.submitList(it.articles)
+
+                     if (it.totalResults % 20 == 0) {
+                        pages = it.totalResults / 20
+
+                     } else {
+                        pages = it.totalResults / 20 + 1
+                     }
+                     isLastPage = pageNumber == pages
+                  }
+               }
+               is Resource.Error   -> {
+                  hideProgressBar()
+                  response.message?.let {
+                     Toast.makeText(activity, "Error", Toast.LENGTH_SHORT).show()
+                  }
+               }
+            }
+         }
+   }
+
+   private fun setSearchView(){
+      binding.searchView.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener{
+         override fun onQueryTextSubmit(p0: String?): Boolean {
+            viewModel.seachNews(country = "ru", searchQuery = p0.toString(), pageNumber = pageNumber)
+            viewSeachedNews()
+            return false
+         }
+
+         override fun onQueryTextChange(p0: String?): Boolean {
+         MainScope().launch {
+            delay(1_000)
+            viewModel.seachNews(country = "ru", searchQuery = p0.toString(), pageNumber = pageNumber)
+            viewSeachedNews()
+         }
+            return false
+         }
+
+      })
+      binding.searchView.setOnCloseListener(object: android.widget.SearchView.OnCloseListener{
+         override fun onClose(): Boolean {
+            initRecyclerView()
+            viewNewsList()
+            return false
+         }
+
+      })
    }
 
    override fun onDestroyView() {

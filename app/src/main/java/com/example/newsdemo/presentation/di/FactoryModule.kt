@@ -2,6 +2,7 @@ package com.example.newsdemo.presentation.di
 
 import android.app.Application
 import com.example.newsdemo.domain.usecase.GetNewsHeadlinesUseCase
+import com.example.newsdemo.domain.usecase.GetSearchNewsUseCase
 import com.example.newsdemo.presentation.viewmodel.NewsViewModelFactory
 import dagger.Module
 import dagger.Provides
@@ -17,8 +18,9 @@ object FactoryModule {
    @Singleton
    fun provideNewsViewModelFactory(
       app:Application,
-      getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase
+      getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase,
+      getSearchNewsUseCase: GetSearchNewsUseCase
    ):NewsViewModelFactory{
-      return NewsViewModelFactory(app, getNewsHeadlinesUseCase)
+      return NewsViewModelFactory(app, getNewsHeadlinesUseCase,getSearchNewsUseCase)
    }
 }

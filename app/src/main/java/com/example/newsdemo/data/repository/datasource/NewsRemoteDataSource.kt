@@ -13,4 +13,10 @@ interface NewsRemoteDataSource {
       country:String,
       pageNumber:Int
    ):Response<TopHeadlinesResponseDto>
+
+   suspend fun fetchSearchTopHeadlines(
+      country:String,
+      searchQuery:String,
+      pageNumber:Int
+   ):Response<TopHeadlinesResponseDto>
 }

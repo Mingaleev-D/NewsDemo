@@ -24,6 +24,20 @@ class NewsRepositoryImpl(
       return responseToResource(newsRemoteDataSource.fetchTopHeadlines(country, pageNumber))
    }
 
+   override suspend fun fetchSearchNews(
+      country: String,
+      searchQuery: String,
+      pageNumber: Int
+   ): Resource<TopHeadlinesResponseDto> {
+      return responseToResource(
+         newsRemoteDataSource.fetchSearchTopHeadlines(
+            country,
+            searchQuery,
+            pageNumber
+         )
+      )
+   }
+
    private fun responseToResource(response: Response<TopHeadlinesResponseDto>): Resource<TopHeadlinesResponseDto> {
       if (response.isSuccessful) {
          response.body()?.let { result ->
@@ -31,10 +45,6 @@ class NewsRepositoryImpl(
          }
       }
       return Resource.Error(response.message())
-   }
-
-   override suspend fun fetchSearchNews(searchQuery: String): Resource<TopHeadlinesResponseDto> {
-      TODO("Not yet implemented")
    }
 
    override suspend fun saveNews(article: Article) {

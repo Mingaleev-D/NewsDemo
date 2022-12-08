@@ -13,7 +13,11 @@ class GetSearchNewsUseCase(
    private val newsRepository: NewsRepository
 ) {
 
-   suspend fun execute(searchQuery:String):Resource<TopHeadlinesResponseDto>{
-      return newsRepository.fetchSearchNews(searchQuery)
+   suspend fun execute(
+      country: String,
+      searchQuery: String,
+      pageNumber: Int
+   ): Resource<TopHeadlinesResponseDto> {
+      return newsRepository.fetchSearchNews(country, searchQuery, pageNumber)
    }
 }

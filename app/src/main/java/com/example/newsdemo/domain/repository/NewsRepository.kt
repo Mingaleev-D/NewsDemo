@@ -16,7 +16,7 @@ interface NewsRepository {
       country:String,
       pageNumber:Int
    ):Resource<TopHeadlinesResponseDto>
-   suspend fun fetchSearchNews(searchQuery:String):Resource<TopHeadlinesResponseDto>
+   suspend fun fetchSearchNews(country:String,searchQuery:String,pageNumber: Int):Resource<TopHeadlinesResponseDto>
    suspend fun saveNews(article:Article)
    suspend fun deleteNews(article: Article)
    fun getSavedNews():Flow<List<Article>>
