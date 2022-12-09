@@ -1,6 +1,7 @@
 package com.example.newsdemo.presentation.di
 
 import com.example.newsdemo.domain.repository.NewsRepository
+import com.example.newsdemo.domain.usecase.GeSavedNewsUseCase
 import com.example.newsdemo.domain.usecase.GetNewsHeadlinesUseCase
 import com.example.newsdemo.domain.usecase.GetSearchNewsUseCase
 import com.example.newsdemo.domain.usecase.SaveNewsUseCase
@@ -30,6 +31,12 @@ object UseCaseModule {
    @Singleton
    fun provideSaveNewsUseCase(newsRepository: NewsRepository): SaveNewsUseCase {
       return SaveNewsUseCase(newsRepository)
+   }
+
+   @Provides
+   @Singleton
+   fun provideGetSavedNewsUseCase(newsRepository: NewsRepository): GeSavedNewsUseCase {
+      return GeSavedNewsUseCase(newsRepository)
    }
 
 }

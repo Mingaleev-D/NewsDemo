@@ -1,6 +1,7 @@
 package com.example.newsdemo.data.repository.datasource
 
 import com.example.newsdemo.data.remote.modelDto.topHeadlines.Article
+import kotlinx.coroutines.flow.Flow
 
 /**
  * @author : Mingaleev D
@@ -9,4 +10,5 @@ import com.example.newsdemo.data.remote.modelDto.topHeadlines.Article
 
 interface NewsLocalDataSource {
    suspend fun saveArticleToDB(article: Article)
+   fun getSavedArticles():Flow<List<Article>>
 }
